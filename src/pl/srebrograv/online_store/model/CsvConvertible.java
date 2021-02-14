@@ -1,4 +1,5 @@
 package pl.srebrograv.online_store.model;
 
-public class CsvConvertible {
+public interface CsvConvertible {
+    String toCsv();
 }
