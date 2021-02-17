@@ -1,9 +1,38 @@
 package pl.srebrograv.online_store.app;
 
 import pl.srebrograv.online_store.exception.NoSuchOptionException;
+import pl.srebrograv.online_store.io.ConsolePrinter;
+import pl.srebrograv.online_store.io.DataReader;
+
+import java.util.InputMismatchException;
 
 public class StoreControl {
 
+    ConsolePrinter printer = new ConsolePrinter();
+    DataReader reader = new DataReader(printer);
+
+    private Option getOption() {
+        boolean optionOk = false;
+        Option option = null;
+        while(!optionOk) {
+            try {
+                option = Option.createFromInt(reader.getInt());
+                optionOk = true;
+            } catch (NoSuchOptionException e) {
+                printer.printLine(e.getMessage() + ", podaj ponownie:");
+            } catch (InputMismatchException ignored) {
+                printer.printLine("Wprowadzono wartość, która nie jest liczbą, podaj ponownie:");
+            }
+        }
+        return option;
+    }
+
+    private void printOptions() {
+        System.out.println("Choose option");
+        for (Option options : Option.values()) {
+            printer.printLine(options.toString());
+        }
+    }
 
     private enum Option {
         EXIT(0, "Exit the program"),
