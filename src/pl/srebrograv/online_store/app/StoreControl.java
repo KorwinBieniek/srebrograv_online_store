@@ -34,6 +34,49 @@ public class StoreControl {
         }
     }
 
+    void controlLoop() {
+        Option option;
+
+        do {
+            printOptions();
+            option = getOption();
+            switch (option) {
+                case ADD_BRACELET:
+
+                    break;
+                case ADD_XERANTHEMUM:
+
+                    break;
+                case PRINT_BRACELETS:
+
+                    break;
+                case PRINT_XERANTHEMUMS:
+
+                    break;
+                case DELETE_BRACELET:
+
+                    break;
+                case DELETE_XERANTHEMUM:
+
+                    break;
+                case ADD_CUSTOMER:
+
+                    break;
+                case PRINT_CUSTOMERS:
+
+                    break;
+                case FIND_PRODUCT:
+
+                    break;
+                case EXIT:
+
+                    break;
+                default:
+                    printer.printLine("Nie ma takiej opcji, wprowadź ponownie: ");
+            }
+        } while (option != Option.EXIT);
+    }
+
     private enum Option {
         EXIT(0, "Exit the program"),
         ADD_BRACELET(1, "Add bracelet"),
