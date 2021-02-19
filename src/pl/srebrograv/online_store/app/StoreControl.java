@@ -3,6 +3,10 @@ package pl.srebrograv.online_store.app;
 import pl.srebrograv.online_store.exception.NoSuchOptionException;
 import pl.srebrograv.online_store.io.ConsolePrinter;
 import pl.srebrograv.online_store.io.DataReader;
+import pl.srebrograv.online_store.model.Bracelet;
+import pl.srebrograv.online_store.model.Plate;
+import pl.srebrograv.online_store.model.Store;
+import pl.srebrograv.online_store.model.Xeranthemum;
 
 import java.util.InputMismatchException;
 
@@ -10,6 +14,8 @@ public class StoreControl {
 
     ConsolePrinter printer = new ConsolePrinter();
     DataReader reader = new DataReader(printer);
+
+    private Store store;
 
     private Option getOption() {
         boolean optionOk = false;
@@ -75,6 +81,28 @@ public class StoreControl {
                     printer.printLine("Nie ma takiej opcji, wprowadź ponownie: ");
             }
         } while (option != Option.EXIT);
+    }
+
+    private void addBracelet() {
+        try {
+            Bracelet bracelet = reader.readAndCreateBracelet();
+            store.addPlate(bracelet);
+        } catch (InputMismatchException e) {
+            printer.printLine("Unable to create a plate, wrong input data");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Maximal capacity reached. Unable to add another plate");
+        }
+    }
+
+    private void addXeranthemum() {
+        try {
+            Xeranthemum xeranthemum = reader.readAndCreateXeranthemum();
+            store.addPlate(xeranthemum);
+        } catch (InputMismatchException e) {
+            printer.printLine("Unable to create a plate, wrong input data");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Maximal capacity reached. Unable to add another plate");
+        }
     }
 
     private enum Option {
