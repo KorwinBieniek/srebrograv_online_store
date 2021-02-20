@@ -1,13 +1,12 @@
 package pl.srebrograv.online_store.app;
 
+import pl.srebrograv.online_store.exception.CustomerAlreadyExistsException;
 import pl.srebrograv.online_store.exception.NoSuchOptionException;
 import pl.srebrograv.online_store.io.ConsolePrinter;
 import pl.srebrograv.online_store.io.DataReader;
-import pl.srebrograv.online_store.model.Bracelet;
-import pl.srebrograv.online_store.model.Plate;
-import pl.srebrograv.online_store.model.Store;
-import pl.srebrograv.online_store.model.Xeranthemum;
+import pl.srebrograv.online_store.model.*;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 public class StoreControl {
@@ -103,6 +102,33 @@ public class StoreControl {
         } catch (ArrayIndexOutOfBoundsException e) {
             printer.printLine("Maximal capacity reached. Unable to add another plate");
         }
+    }
+
+    private void addCustomer() {
+        StoreCustomer storeCustomer = reader.createStoreCustomer();
+        try {
+            store.addUser(storeCustomer);
+        } catch (CustomerAlreadyExistsException e) {
+            printer.printLine(e.getMessage());
+        }
+    }
+
+    private void printXeranthemum() {
+        printer.printPlates(store.getSortedPlates(
+                Comparator.comparing(Plate::getPendantName, String.CASE_INSENSITIVE_ORDER))
+        );
+    }
+
+    private void printBracelets() {
+        printer.printPlates(store.getSortedPlates(
+                Comparator.comparing(Plate::getPendantName, String.CASE_INSENSITIVE_ORDER)
+        ));
+    }
+
+    private void printCustomers() {
+        printer.printCustomers(store.getSortedCustomers(
+                Comparator.comparing(Customer::getLastName, String.CASE_INSENSITIVE_ORDER)
+        ));
     }
 
     private enum Option {
