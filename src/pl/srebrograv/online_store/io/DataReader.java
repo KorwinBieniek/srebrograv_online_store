@@ -26,6 +26,10 @@ public class DataReader {
         }
     }
 
+    public String getString() {
+        return sc.nextLine();
+    }
+
     public Xeranthemum readAndCreateXeranthemum() {
         printer.printLine("Pendant name: ");
         String pendantName = sc.nextLine();

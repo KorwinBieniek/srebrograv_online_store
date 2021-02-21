@@ -131,6 +131,39 @@ public class StoreControl {
         ));
     }
 
+    private void findBook() {
+        printer.printLine("Insert a plate name:");
+        String name = reader.getString();
+        String notFoundMessage = "No plates of such name";
+        store.findPlateByName(name)
+                .map(Plate::toString)
+                .ifPresentOrElse(System.out::println, () -> System.out.println(notFoundMessage));
+    }
+
+    private void deleteXeranthemum() {
+        try {
+            Xeranthemum xeranthemum = reader.readAndCreateXeranthemum();
+            if (store.removePublication(xeranthemum))
+                printer.printLine("Removed xeranthemum.");
+            else
+                printer.printLine("No such xeranthemum.");
+        } catch (InputMismatchException e) {
+            printer.printLine("Couldn't create a xeranthemum, invalid data");
+        }
+    }
+
+    private void deleteBracelet() {
+        try {
+            Bracelet bracelet = reader.readAndCreateBracelet();
+            if (store.removePublication(bracelet))
+                printer.printLine("Removed bracelet.");
+            else
+                printer.printLine("No such bracelet.");
+        } catch (InputMismatchException e) {
+            printer.printLine("Couldn't create a bracelet, invalid data");
+        }
+    }
+
     private enum Option {
         EXIT(0, "Exit the program"),
         ADD_BRACELET(1, "Add bracelet"),
