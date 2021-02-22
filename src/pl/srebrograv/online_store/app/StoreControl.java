@@ -1,6 +1,7 @@
 package pl.srebrograv.online_store.app;
 
 import pl.srebrograv.online_store.exception.CustomerAlreadyExistsException;
+import pl.srebrograv.online_store.exception.DataExportException;
 import pl.srebrograv.online_store.exception.NoSuchOptionException;
 import pl.srebrograv.online_store.io.ConsolePrinter;
 import pl.srebrograv.online_store.io.DataReader;
@@ -162,6 +163,17 @@ public class StoreControl {
         } catch (InputMismatchException e) {
             printer.printLine("Couldn't create a bracelet, invalid data");
         }
+    }
+
+    private void exit() {
+        try {
+            //fileManager.exportData(store);
+            printer.printLine("Export danych do pliku zakończony powodzeniem");
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+        }
+        reader.close();
+        printer.printLine("Koniec programu, papa!");
     }
 
     private enum Option {
