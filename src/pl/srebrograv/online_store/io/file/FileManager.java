@@ -1,4 +1,8 @@
 package pl.srebrograv.online_store.io.file;
 
-public class FileManager {
+import pl.srebrograv.online_store.model.Store;
+
+public interface FileManager {
+    Store importData();
+    void exportData(Store library);
 }
