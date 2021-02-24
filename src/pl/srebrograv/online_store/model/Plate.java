@@ -1,6 +1,7 @@
 package pl.srebrograv.online_store.model;
 
-public class Plate {
+public class Plate implements CsvConvertible {
+    private static final String TYPE = "Plate";
     private String pendantName;
     private String metalType;
 
@@ -28,5 +29,12 @@ public class Plate {
     @Override
     public String toString() {
         return pendantName + ", type of metal: " + metalType;
+    }
+
+    @Override
+    public String toCsv() {
+        return (TYPE + ";") +
+                getPendantName() + ";" +
+                getMetalType();
     }
 }
