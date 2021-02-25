@@ -15,7 +15,7 @@ public class StoreControl {
     ConsolePrinter printer = new ConsolePrinter();
     DataReader reader = new DataReader(printer);
 
-    private Store store;
+    private final Store store = new Store();
 
     private Option getOption() {
         boolean optionOk = false;
@@ -47,38 +47,17 @@ public class StoreControl {
             printOptions();
             option = getOption();
             switch (option) {
-                case ADD_BRACELET:
-
-                    break;
-                case ADD_XERANTHEMUM:
-
-                    break;
-                case PRINT_BRACELETS:
-
-                    break;
-                case PRINT_XERANTHEMUMS:
-
-                    break;
-                case DELETE_BRACELET:
-
-                    break;
-                case DELETE_XERANTHEMUM:
-
-                    break;
-                case ADD_CUSTOMER:
-
-                    break;
-                case PRINT_CUSTOMERS:
-
-                    break;
-                case FIND_PRODUCT:
-
-                    break;
-                case EXIT:
-
-                    break;
-                default:
-                    printer.printLine("Nie ma takiej opcji, wprowadź ponownie: ");
+                case ADD_BRACELET -> addBracelet();
+                case ADD_XERANTHEMUM -> addXeranthemum();
+                case PRINT_BRACELETS -> printBracelets();
+                case PRINT_XERANTHEMUMS -> printXeranthemum();
+                case DELETE_BRACELET -> deleteBracelet();
+                case DELETE_XERANTHEMUM -> deleteXeranthemum();
+                case ADD_CUSTOMER -> addCustomer();
+                case PRINT_CUSTOMERS -> printCustomers();
+                case FIND_PRODUCT -> findPlate();
+                case EXIT -> exit();
+                default -> printer.printLine("Nie ma takiej opcji, wprowadź ponownie: ");
             }
         } while (option != Option.EXIT);
     }
@@ -132,7 +111,7 @@ public class StoreControl {
         ));
     }
 
-    private void findBook() {
+    private void findPlate() {
         printer.printLine("Insert a plate name:");
         String name = reader.getString();
         String notFoundMessage = "No plates of such name";
